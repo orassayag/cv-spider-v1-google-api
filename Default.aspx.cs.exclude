@@ -1,0 +1,411 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Net;
+using System.Text.RegularExpressions;
+using System.IO;
+using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Runtime.Serialization;
+using System.Web.Caching;
+using System.Net.Mail;
+using System.Threading;
+
+public partial class _Default : Page
+{
+    private List<string> list = new List<string>();
+    private CVDataClassesDataContext mainDb = new CVDataClassesDataContext();
+
+    /// <summary>
+    /// Get a string representation of a webpage's source.
+    /// </summary>
+    /// <param name="URL">The URL to get the source from.</param>
+    /// <returns></returns>
+    public string getPageSource(string URL)
+    {
+        WebClient webClient = new WebClient();
+        string strSource = webClient.DownloadString(URL);
+        webClient.Dispose();
+        return strSource;
+    }
+
+    public class SearchResult
+    {
+        public string url;
+        public string title;
+        public string content;
+        public FindingEngine engine;
+        public enum FindingEngine { google, bing, google_and_bing };
+
+        public SearchResult(string url, string title, string content, FindingEngine engine)
+        {
+            this.url = url;
+            this.title = title;
+            this.content = content;
+            this.engine = engine;
+        }
+    }
+
+    public static List<SearchResult> GoogleSearch(string search_expression,
+        Dictionary<string, object> stats_dict)
+    {
+
+        var url_template = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&rsz=large&safe=active&q={0}&start={1}";
+        Uri search_url;
+        var results_list = new List<SearchResult>();
+
+        try
+        {
+
+            search_url = new Uri(string.Format(url_template, search_expression, 0));
+            var page = new WebClient().DownloadString(search_url);
+            JObject o = (JObject)JsonConvert.DeserializeObject(page);
+            var t = o["responseData"]["results"].Children();
+
+            search_url = new Uri(string.Format(url_template, search_expression, 8));
+            var page1 = new WebClient().DownloadString(search_url);
+            JObject o2 = (JObject)JsonConvert.DeserializeObject(page);
+            var t2 = o["responseData"]["results"].Children();
+
+            search_url = new Uri(string.Format(url_template, search_expression, 16));
+            var page2 = new WebClient().DownloadString(search_url);
+            JObject o3 = (JObject)JsonConvert.DeserializeObject(page);
+            var t3 = o["responseData"]["results"].Children();
+
+            search_url = new Uri(string.Format(url_template, search_expression, 24));
+            var page4 = new WebClient().DownloadString(search_url);
+            JObject o4 = (JObject)JsonConvert.DeserializeObject(page);
+            var t4 = o["responseData"]["results"].Children();
+
+            search_url = new Uri(string.Format(url_template, search_expression, 32));
+            var page5 = new WebClient().DownloadString(search_url);
+            JObject o5 = (JObject)JsonConvert.DeserializeObject(page);
+            var t5 = o["responseData"]["results"].Children();
+
+            search_url = new Uri(string.Format(url_template, search_expression, 40));
+            var page6 = new WebClient().DownloadString(search_url);
+            JObject o6 = (JObject)JsonConvert.DeserializeObject(page);
+            var t6 = o["responseData"]["results"].Children();
+
+            search_url = new Uri(string.Format(url_template, search_expression, 48));
+            var page7 = new WebClient().DownloadString(search_url);
+            JObject o7 = (JObject)JsonConvert.DeserializeObject(page);
+            var t7 = o["responseData"]["results"].Children();
+
+            search_url = new Uri(string.Format(url_template, search_expression, 56));
+            var page8 = new WebClient().DownloadString(search_url);
+            JObject o8 = (JObject)JsonConvert.DeserializeObject(page);
+            var t8 = o["responseData"]["results"].Children();
+
+            var results_query1 = from result in t
+                                 select
+                                 new SearchResult(
+                                     result.Value<string>("url").ToString(),
+                                     result.Value<string>("title").ToString(),
+                                     result.Value<string>("content").ToString(),
+                                     SearchResult.FindingEngine.google
+                                     );
+            var results_query2 = from result in t2
+                                 select
+                                 new SearchResult(
+                                     result.Value<string>("url").ToString(),
+                                     result.Value<string>("title").ToString(),
+                                     result.Value<string>("content").ToString(),
+                                     SearchResult.FindingEngine.google
+                                     );
+            var results_query3 = from result in t3
+                                 select
+                                 new SearchResult(
+                                     result.Value<string>("url").ToString(),
+                                     result.Value<string>("title").ToString(),
+                                     result.Value<string>("content").ToString(),
+                                     SearchResult.FindingEngine.google
+                                     );
+            var results_query4 = from result in t4
+                                 select
+                                 new SearchResult(
+                                     result.Value<string>("url").ToString(),
+                                     result.Value<string>("title").ToString(),
+                                     result.Value<string>("content").ToString(),
+                                     SearchResult.FindingEngine.google
+                                     );
+            var results_query5 = from result in t5
+                                 select
+                                 new SearchResult(
+                                     result.Value<string>("url").ToString(),
+                                     result.Value<string>("title").ToString(),
+                                     result.Value<string>("content").ToString(),
+                                     SearchResult.FindingEngine.google
+                                     );
+            var results_query6 = from result in t6
+                                 select
+                                 new SearchResult(
+                                     result.Value<string>("url").ToString(),
+                                     result.Value<string>("title").ToString(),
+                                     result.Value<string>("content").ToString(),
+                                     SearchResult.FindingEngine.google
+                                     );
+            var results_query7 = from result in t7
+                                 select
+                                 new SearchResult(
+                                     result.Value<string>("url").ToString(),
+                                     result.Value<string>("title").ToString(),
+                                     result.Value<string>("content").ToString(),
+                                     SearchResult.FindingEngine.google
+                                     );
+
+
+            var results_query8 = from result in t8
+                                 select
+                                 new SearchResult(
+                                     result.Value<string>("url").ToString(),
+                                     result.Value<string>("title").ToString(),
+                                     result.Value<string>("content").ToString(),
+                                     SearchResult.FindingEngine.google
+                                     );
+
+
+            foreach (var result in results_query1)
+                results_list.Add(result);
+            foreach (var result in results_query2)
+                results_list.Add(result);
+            foreach (var result in results_query3)
+                results_list.Add(result);
+            foreach (var result in results_query4)
+                results_list.Add(result);
+            foreach (var result in results_query5)
+                results_list.Add(result);
+            foreach (var result in results_query6)
+                results_list.Add(result);
+            foreach (var result in results_query7)
+                results_list.Add(result);
+
+            foreach (var result in results_query8)
+                results_list.Add(result);
+        }
+        catch (Exception e)
+        {
+            string m = e.Message;
+        }
+        return results_list;
+    }
+
+
+    protected void runJob_Click(object sender, EventArgs e)
+    {
+        //int count = 0;
+        //int totalCount = mainDb.CVMails.Count();
+
+        //List<SearchResult> reuslts = GoogleSearch("", new Dictionary<string, object>());
+
+        //StreamWriter writer = new StreamWriter(@"C:\Users\Or\Desktop\CV\Spider\spider.txt", true);
+        //foreach (SearchResult d in reuslts)
+        //{
+        //    try
+        //    {
+        //        string g = getPageSource(d.url);
+        //        Regex t = new Regex(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+        //        foreach (Match m in t.Matches(g))
+        //        {
+        //            CVMail f = mainDb.CVMails.SingleOrDefault(b => b.MailValue == m.Value);
+        //            if (f == null) 
+        //            {
+        //                mainDb.CVMails.InsertOnSubmit(new CVMail
+        //                {
+        //                    MailID = mainDb.CVMails.Count() + 1,
+        //                    MailValue = m.Value
+        //                });
+
+        //                mainDb.SubmitChanges();
+
+        //                this.list.Add(m.Value);
+        //                writer.Write(m.Value + ", ");
+        //                count++;
+        //            }
+
+        //        }
+        //    }
+        //    catch (Exception s)
+        //    {
+        //        string ng = s.Message;
+        //        continue;
+        //    }
+        //}
+
+        //this.doneLabel.Text = count.ToString();
+        //this.totalLabel.Text = totalCount.ToString();
+        //if (writer != null)
+        //{
+        //    writer.Close();
+        //}
+
+
+
+
+        int count = 0;
+        int totalCount = mainDb.CVMails.Count();
+
+        List<string> list = new List<string>();
+        if (!string.IsNullOrEmpty(search1.Text))
+        {
+            list.Add(search1.Text);
+        }
+        if (!string.IsNullOrEmpty(search2.Text))
+        {
+            list.Add(search2.Text);
+        }
+        if (!string.IsNullOrEmpty(search3.Text))
+        {
+            list.Add(search3.Text);
+        }
+        if (!string.IsNullOrEmpty(search4.Text))
+        {
+            list.Add(search4.Text);
+        }
+        if (!string.IsNullOrEmpty(search5.Text))
+        {
+            list.Add(search5.Text);
+        }
+        if (!string.IsNullOrEmpty(search6.Text))
+        {
+            list.Add(search6.Text);
+        }
+        if (!string.IsNullOrEmpty(search7.Text))
+        {
+            list.Add(search7.Text);
+        }
+        if (!string.IsNullOrEmpty(search8.Text))
+        {
+            list.Add(search8.Text);
+        }
+        if (!string.IsNullOrEmpty(search9.Text))
+        {
+            list.Add(search9.Text);
+        }
+        if (!string.IsNullOrEmpty(search10.Text))
+        {
+            list.Add(search10.Text);
+        }
+        if (!string.IsNullOrEmpty(search11.Text))
+        {
+            list.Add(search11.Text);
+        }
+        if (!string.IsNullOrEmpty(search12.Text))
+        {
+            list.Add(search12.Text);
+        }
+        search1.Text = string.Empty;
+        search2.Text = string.Empty;
+        search3.Text = string.Empty;
+        search4.Text = string.Empty;
+        search5.Text = string.Empty;
+        search6.Text = string.Empty;
+        search7.Text = string.Empty;
+        search8.Text = string.Empty;
+        search9.Text = string.Empty;
+        search10.Text = string.Empty;
+        search11.Text = string.Empty;
+        search12.Text = string.Empty;
+
+        StreamWriter writer = new StreamWriter(@"C:\Users\Or\Desktop\CV\Spider\spider.txt", true);
+        foreach (string d in list)
+        {
+            try
+            {
+                string g = getPageSource(d);
+                Regex t = new Regex(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+                foreach (Match m in t.Matches(g))
+                {
+                    CVMail f = mainDb.CVMails.SingleOrDefault(b => b.MailValue == m.Value);
+                    if (f == null)
+                    {
+                        mainDb.CVMails.InsertOnSubmit(new CVMail
+                        {
+                            MailID = mainDb.CVMails.Count() + 1,
+                            MailValue = m.Value
+                        });
+
+                        mainDb.SubmitChanges();
+
+                        writer.Write(m.Value + ", ");
+
+                        this.list.Add(m.Value);
+
+                        //    var fromAddress = new MailAddress();
+                        //    var toAddress = new MailAddress(m.Value, "To Name");
+                        //    const string subject = "";
+                        //    const string body = "";
+
+                        //    var smtp = new SmtpClient
+                        //    {
+                        //        Host = "smtp.gmail.com",
+                        //        Port = 587,
+                        //        EnableSsl = true,
+                        //        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        //        UseDefaultCredentials = false,
+                        //        Credentials = new NetworkCredential()
+                        //    };
+                        //    Attachment cv = new Attachment();
+                        //    MailMessage mail = new MailMessage(fromAddress, toAddress);
+                        //    mail.Attachments.Add(cv);
+                        //    mail.Subject = subject;
+                        //    mail.Body = body; ;
+                        //    smtp.Send(mail);
+                        //    Thread.Sleep(5000);
+                        count++;
+                    }
+                }
+            }
+            catch (Exception s)
+            {
+                this.doneLabel.Text = s.Message;
+                break;
+            }
+        }
+
+
+        this.doneLabel.Text = count.ToString();
+        this.totalLabel.Text = totalCount.ToString();
+        if (writer != null)
+        {
+            writer.Close();
+        }
+    }
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+        
+
+        if (!Page.IsPostBack)
+        {
+            List<string> list = new List<string>();
+            StreamReader r = new StreamReader(@"C:\Users\Or\Desktop\CV\Spider\spider.txt");
+
+            StringBuilder build = new StringBuilder();
+
+            while (!r.EndOfStream)
+            {
+                build.Append(r.ReadLine());
+            }
+
+            string[] stringer = build.ToString().Split(',');
+            foreach (string m in stringer)
+            {
+                if (!list.Contains(m))
+                {
+                    this.list.Add(m);
+                }
+            }
+
+            //this.doneLabel.Text = "0";
+            this.totalLabel.Text = stringer.Count().ToString();
+
+            r.Close();
+        }
+    }
+}

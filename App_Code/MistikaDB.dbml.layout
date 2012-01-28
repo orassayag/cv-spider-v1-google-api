@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="MistikaDB">
+  <DataContextMoniker Name="/MistikaDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="68953d3e-e26a-43de-a7d0-193485304bb6" absoluteBounds="4, 1.375, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/MistikaDBDataContext/CVMail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0399772d-0b31-421e-a360-b79e5acbe1d9" absoluteBounds="4.015, 1.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
