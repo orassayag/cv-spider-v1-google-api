@@ -1,7 +1,6 @@
 # CV Spider V1 (Google API)
 
-Built in January 2012.
-This is the first version of CV spider that search with Google API in view source, emails that matches some keys, and send automatic emails that found.
+Built in January 2012. This is the first version of CV spider that search with Google API in view source, emails that matches some keys, and send automatic emails that found.
 
 ## Getting Started
 
