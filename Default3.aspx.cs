@@ -20,7 +20,7 @@ public partial class Default3 : System.Web.UI.Page
 {
     private MistikaDBDataContext mainDb = new MistikaDBDataContext();
 
-    /// <summary> /// Retrives
+    /// <summary> /// Retrieves
     //the position of the url from a search /// on
     public static int GetPosition(Uri url, string searchTerm)
     {
@@ -50,8 +50,8 @@ public partial class Default3 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        string[] lista = new string[] 
-        { 
+        string[] lista = new string[]
+        {
                         "פופולריות עולה – פיננסים","הבנק הבינלאומי הראשון","בנק מזרחי טפחות","הראל חברה לביטוח","פועלים באינטרנט","בנק לאומי סניפים",
             "אמריקן אקספרס","שער הדולר","לאומי קארד","ביזפורטל","בנק אגוד","פופולריות עולה – קמעונאות","סופר פארם","שופרסל",
             "צומת ספרים","דיוטיפרי","הום סנטר","טויז אר אס","מחסני חשמל","סטימצקי","מקדונלדס","למטייל",

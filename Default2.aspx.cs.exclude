@@ -13,181 +13,181 @@ using System.Threading;
 
 public partial class Default2 : System.Web.UI.Page
 {
-    private CVDataClassesDataContext mainDb = new CVDataClassesDataContext();
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        GetMailsToText(2900);
-    }
+    private CVDataClassesDataContext mainDb = new CVDataClassesDataContext();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        GetMailsToText(2900);
+    }
 
-    public void GetMailsToText(int startCount)
-    {
-        StreamWriter writer = new StreamWriter(@"C:\Users\Or\Desktop\Spider\spider.txt", true);
-        try
-        {
-            for (int i = startCount; i < mainDb.CVMails.Count(); i++)
-            {
-                CVMail mail = mainDb.CVMails.SingleOrDefault(g => g.MailID == i);
-                writer.Write(mail.MailValue + ", ");
-            }
-        }
-        catch (Exception e)
-        { 
-            string df = e.Message; 
-        }
-        finally
-        {
-            if (writer != null)
-            {
-                writer.Close();
-            }
-        }
-    }
+    public void GetMailsToText(int startCount)
+    {
+        StreamWriter writer = new StreamWriter(@"C:\Users\Or\Desktop\Spider\spider.txt", true);
+        try
+        {
+            for (int i = startCount; i < mainDb.CVMails.Count(); i++)
+            {
+                CVMail mail = mainDb.CVMails.SingleOrDefault(g => g.MailID == i);
+                writer.Write(mail.MailValue + ", ");
+            }
+        }
+        catch (Exception e)
+        {
+            string df = e.Message;
+        }
+        finally
+        {
+            if (writer != null)
+            {
+                writer.Close();
+            }
+        }
+    }
 
-    public string getPageSource(string URL)
-    {
-        WebClient webClient = new WebClient();
-        string strSource = webClient.DownloadString(URL);
-        webClient.Dispose();
-        return strSource;
+    public string getPageSource(string URL)
+    {
+        WebClient webClient = new WebClient();
+        string strSource = webClient.DownloadString(URL);
+        webClient.Dispose();
+        return strSource;
 
-        //string result = string.Empty;
-        //using (var client = new WebClient())
-        //{
-        //    var newUri = new Uri("http://proxy.foo.com/");
-        //    var myProxy = new WebProxy();
-        //    myProxy.Credentials = CredentialCache.DefaultCredentials;
-        //    myProxy.Address = newUri;
-        //    client.Proxy = new WebProxy("203.175.185.43", 8090);
+        //string result = string.Empty;
+        //using (var client = new WebClient())
+        //{
+        //    var newUri = new Uri("http://proxy.foo.com/");
+        //    var myProxy = new WebProxy();
+        //    myProxy.Credentials = CredentialCache.DefaultCredentials;
+        //    myProxy.Address = newUri;
+        //    client.Proxy = new WebProxy("203.175.185.43", 8090);
 
-        //    var query = HttpUtility.ParseQueryString(string.Empty);
-        //    query["q"] = "info:http://www.yahoo.com";
-        //    var url = new UriBuilder("http://www.google.com/search");
-        //    url.Query = query.ToString();
-        //     result = client.DownloadString(url.ToString());
-        //}
-        //return result;
+        //    var query = HttpUtility.ParseQueryString(string.Empty);
+        //    query["q"] = "info:http://www.yahoo.com";
+        //    var url = new UriBuilder("http://www.google.com/search");
+        //    url.Query = query.ToString();
+        //     result = client.DownloadString(url.ToString());
+        //}
+        //return result;
 
-        //Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        //client.Connect("203.175.185.43", 8090);
+        //Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        //client.Connect("203.175.185.43", 8090);
 
-        ////client.onDisconnection = new ConnectionEvent(OnDisconnection);
-        ////client.onReceive = new BufferEvent(OnReceive);
-        ////client.BeginReceive();
+        ////client.onDisconnection = new ConnectionEvent(OnDisconnection);
+        ////client.onReceive = new BufferEvent(OnReceive);
+        ////client.BeginReceive();
 
-        //Socket sock = Sockets.CreateTCPSocket("www.myserver.com", 2345);
-        //client = new ClientInfo(sock, false); // Don't start receiving yet
-        //client.OnReadBytes += new ConnectionReadBytes(ReadData);
-        //client.BeginReceive();
-    }
+        //Socket sock = Sockets.CreateTCPSocket("www.myserver.com", 2345);
+        //client = new ClientInfo(sock, false); // Don't start receiving yet
+        //client.OnReadBytes += new ConnectionReadBytes(ReadData);
+        //client.BeginReceive();
+    }
 
-    public void GetPosition(string searchTerm)
-    {
-        for (int i = 10; i < 500; i += 10)
-        {
-            try
-            {
-                Thread.Sleep(25000);
-                string raw = "http://www.google.co.il/search?q={0}&hl=iw&rls=com.microsoft:en-US:%7Breferrer:source%7D&prmd=imvns&ei=FYY_T9KZBqK90QX9uLGPDw&start={1}&sa=N&biw=1440&bih=775";
-                string search = string.Format(raw, searchTerm, i);
-                string m = getPageSource(search);
-                FindPosition(m);
+    public void GetPosition(string searchTerm)
+    {
+        for (int i = 10; i < 500; i += 10)
+        {
+            try
+            {
+                Thread.Sleep(25000);
+                string raw = "http://www.google.co.il/search?q={0}&hl=iw&rls=com.microsoft:en-US:%7Breferrer:source%7D&prmd=imvns&ei=FYY_T9KZBqK90QX9uLGPDw&start={1}&sa=N&biw=1440&bih=775";
+                string search = string.Format(raw, searchTerm, i);
+                string m = getPageSource(search);
+                FindPosition(m);
 
-            }
-            catch (Exception b)
-            {
-                string m = b.Message;
-                if (m.Contains("503"))
-                {
-                    break;
-                }
-                continue;
-            }
-        }
-    }
+            }
+            catch (Exception b)
+            {
+                string m = b.Message;
+                if (m.Contains("503"))
+                {
+                    break;
+                }
+                continue;
+            }
+        }
+    }
 
-    public void FindPosition(string html)
-    {
-        int counterd = 0;
-        StreamWriter writer = new StreamWriter(@"C:\Users\Or\Desktop\Spider\spider.txt", true);
+    public void FindPosition(string html)
+    {
+        int counter = 0;
+        StreamWriter writer = new StreamWriter(@"C:\Users\Or\Desktop\Spider\spider.txt", true);
 
-        //string lookup = @"(http|https)://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?";
-        //string lookup = @"^(ht|f)tp(s?)://([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$";
-        string lookup = @"((https?|http|ftp|gopher|telnet|file|notes|ms-help):((//)|(\\\\))+[\w\d:#@%/;$()~_?\+-=\\\.&]*)";
-        MatchCollection matches = Regex.Matches(html, lookup);
-        for (int i = 0; i < matches.Count; i++)
-        {
-            string match = matches[i].Value;
+        //string lookup = @"(http|https)://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?";
+        //string lookup = @"^(ht|f)tp(s?)://([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$";
+        string lookup = @"((https?|http|ftp|gopher|telnet|file|notes|ms-help):((//)|(\\\\))+[\w\d:#@%/;$()~_?\+-=\\\.&]*)";
+        MatchCollection matches = Regex.Matches(html, lookup);
+        for (int i = 0; i < matches.Count; i++)
+        {
+            string match = matches[i].Value;
 
-            if (match.IndexOf("google") == -1)
-            {
-                try
-                {
-                    string g = getPageSource(match);
-                    Regex t = new Regex(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
-                    foreach (Match m in t.Matches(g))
-                    {
-                        CVMail f = mainDb.CVMails.SingleOrDefault(b => b.MailValue == m.Value);
-                        if (f == null)
-                        {
-                            long x = mainDb.CVMails.OrderByDescending(y => y.MailID).First().MailID;
-                            mainDb.CVMails.InsertOnSubmit(new CVMail
-                            {
-                                MailID = x + 1,
-                                MailValue = m.Value
-                            });
+            if (match.IndexOf("google") == -1)
+            {
+                try
+                {
+                    string g = getPageSource(match);
+                    Regex t = new Regex(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+                    foreach (Match m in t.Matches(g))
+                    {
+                        CVMail f = mainDb.CVMails.SingleOrDefault(b => b.MailValue == m.Value);
+                        if (f == null)
+                        {
+                            long x = mainDb.CVMails.OrderByDescending(y => y.MailID).First().MailID;
+                            mainDb.CVMails.InsertOnSubmit(new CVMail
+                            {
+                                MailID = x + 1,
+                                MailValue = m.Value
+                            });
 
-                            mainDb.SubmitChanges();
+                            mainDb.SubmitChanges();
 
-                            writer.Write(m.Value + ", ");
-                            counterd++;
-                        }
-                    }
-                }
-                catch (Exception s)
-                {
-                    if (writer != null)
-                    {
-                        writer.Close();
-                    }
-                    string m = s.Message;
-                    continue;
-                }
-            }
-        }
+                            writer.Write(m.Value + ", ");
+                            counter++;
+                        }
+                    }
+                }
+                catch (Exception s)
+                {
+                    if (writer != null)
+                    {
+                        writer.Close();
+                    }
+                    string m = s.Message;
+                    continue;
+                }
+            }
+        }
 
-        if (writer != null)
-        {
-            writer.Close();
-        }
-        counter.Text = counterd.ToString();
-    }
+        if (writer != null)
+        {
+            writer.Close();
+        }
+        counter.Text = counter.ToString();
+    }
 
-    public void submit_Click(object sender, EventArgs e)
-    {
-        string[] lista = new string[] 
-        { 
-            "דרושה מזכירה", "דרוש/ה מזכיר/ה", "דרוש מנהל קשרי לקוחות",
-            "דרושה אשת שיווק ומכירות", "דרושה אשת מכירות", "דרוש איש מכירות",
-            "דרושה מנהלת מחלקת מכירות", "דרוש מנהל מחלקת מכירות", "דרושה מנהלת שיווקת ומכירות",
-            "דרושה פקידה", "דרוש/ה פקיד/ה", "דרושה מזכירת עורך דין","דרושה מזכירה",
-            "דרושה מזכירה ללא ניסיון", "דרושה מזכירה משפטית",
-            "דרושה מנהלת שייוק", "דרוש מזכיר", "דרוש/ה מזכיר/ה", "דרושה מזכירה לחצי משרה",
-            "דרושה מנהלת מחלקת שיווק ומכירות", "דרושה מנהלת תיקי לקוחות",
-            "דרוש/ה מנהל/ת שיווק", "דרוש/ה איש/אשת שיווק",
-        };
+    public void submit_Click(object sender, EventArgs e)
+    {
+        string[] lista = new string[]
+        {
+            "דרושה מזכירה", "דרוש/ה מזכיר/ה", "דרוש מנהל קשרי לקוחות",
+            "דרושה אשת שיווק ומכירות", "דרושה אשת מכירות", "דרוש איש מכירות",
+            "דרושה מנהלת מחלקת מכירות", "דרוש מנהל מחלקת מכירות", "דרושה מנהלת שיווקת ומכירות",
+            "דרושה פקידה", "דרוש/ה פקיד/ה", "דרושה מזכירת עורך דין","דרושה מזכירה",
+            "דרושה מזכירה ללא ניסיון", "דרושה מזכירה משפטית",
+            "דרושה מנהלת שייוק", "דרוש מזכיר", "דרוש/ה מזכיר/ה", "דרושה מזכירה לחצי משרה",
+            "דרושה מנהלת מחלקת שיווק ומכירות", "דרושה מנהלת תיקי לקוחות",
+            "דרוש/ה מנהל/ת שיווק", "דרוש/ה איש/אשת שיווק",
+        };
 
-        foreach (string m in lista)
-        {
-            GetPosition(m);
-        }
+        foreach (string m in lista)
+        {
+            GetPosition(m);
+        }
 
-        //GetPosition(searcher.Text);
+        //GetPosition(searcher.Text);
 
 
-        //Socket client1 = new Socket();
-        //client.Connect("127.0.0.1", 7788);
-        //client.onDisconnection = new ConnectionEvent(OnDisconnection);
-        //client.onReceive = new BufferEvent(OnReceive);
-        //client.BeginReceive(
-    }
+        //Socket client1 = new Socket();
+        //client.Connect("127.0.0.1", 7788);
+        //client.onDisconnection = new ConnectionEvent(OnDisconnection);
+        //client.onReceive = new BufferEvent(OnReceive);
+        //client.BeginReceive(
+    }
 }

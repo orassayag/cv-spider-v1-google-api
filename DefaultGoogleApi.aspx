@@ -33,7 +33,7 @@
             // tell the searcher to draw itself and tell it where to attach
             searchControl.draw(document.getElementById("searchcontrol"));
 
-            // execute an inital search
+            // execute an initial search
             searchControl.execute("VW GTI");
         }
         google.setOnLoadCallback(OnLoad);
