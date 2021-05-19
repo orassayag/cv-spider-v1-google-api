@@ -8,7 +8,7 @@ Clone the project to your computer.
 
 ### Prerequisites
 
-You'll need to install .Net and SQL, and to build a new LINQ-to-SQL map layout in order to make it work.
+You'll need to install .NET and SQL, and to build a new LINQ-to-SQL map layout in order to make it work.
 
 ## Built With
 
