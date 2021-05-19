@@ -8,14 +8,14 @@ Clone the project to your computer.
 
 ### Prerequisites
 
-You'll need to install .NET and SQL, and to build a new LINQ-to-SQL map layout in order to make it work.
+You'll need to install .NET and SQL, and to build a new LINQ-TO-SQL map layout in order to make it work.
 
 ## Built With
 
 * [ASP.NET Web-Forms](https://www.asp.net/web-forms) - The web framework used.
 * [SQL](https://azure.microsoft.com/en-us/services/sql-database/) - The database used.
-* [LINQ-TO-SQL](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/linq/) - The component of .NET Framework.
-* [GIT](https://git-scm.com/) - Source Management.
+* [LINQ-TO-SQL](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/linq/) - The component of .NET framework.
+* [GIT](https://git-scm.com/) - Source management.
 
 ## Contributing
 
