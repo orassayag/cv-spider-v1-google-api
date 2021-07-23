@@ -12,10 +12,10 @@ You'll need to install .NET and SQL, and to build a new LINQ-TO-SQL map layout i
 
 ## Built With
 
-* [ASP.NET Web-Forms](https://www.asp.net/web-forms) - The web framework used.
-* [SQL](https://azure.microsoft.com/en-us/services/sql-database/) - The database used.
-* [LINQ-TO-SQL](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/linq/) - The component of .NET framework.
-* [GIT](https://git-scm.com/) - Source management.
+* [Asp.NET Web-Forms](https://www.asp.net/web-forms) - The web framework used.
+* [Sql](https://azure.microsoft.com/en-us/services/sql-database) - The database used.
+* [Linq-To-Sql](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/linq) - The component of .NET framework.
+* [Git](https://git-scm.com) - Source management.
 
 ## Contributing
 
@@ -35,4 +35,4 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## License
 
-This application has an UNLICENSED License.
+This application has an UNLICENSED license.
