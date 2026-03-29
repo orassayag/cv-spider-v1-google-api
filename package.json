@@ -1,0 +1,83 @@
+{
+  "name": "cv-spider-v1-google-api",
+  "version": "1.0.0",
+  "private": false,
+  "description": "An ASP.NET Web Forms application for automated web scraping and email extraction from Google search results. Built in 2012 as a proof-of-concept for lead generation using SERP scraping, LINQ-to-SQL ORM, and SQL Server database storage with duplicate detection and rate limiting.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/orassayag/cv-spider-v1-google-api.git"
+  },
+  "keywords": [
+    "aspnet",
+    "webforms",
+    "csharp",
+    "dotnet",
+    "web-scraping",
+    "email-extraction",
+    "google-search",
+    "serp-scraping",
+    "lead-generation",
+    "linq-to-sql",
+    "sql-server",
+    "regex",
+    "automation",
+    "data-mining",
+    "historical-project",
+    "legacy-code",
+    "proof-of-concept"
+  ],
+  "author": "Or Assayag <orassayag@gmail.com>",
+  "contributors": [
+    {
+      "name": "Or Assayag",
+      "email": "orassayag@gmail.com",
+      "url": "https://github.com/orassayag"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/orassayag/cv-spider-v1-google-api/issues"
+  },
+  "homepage": "https://github.com/orassayag/cv-spider-v1-google-api#readme",
+  "engines": {
+    "note": "This is a .NET Framework 3.5 project, not Node.js"
+  },
+  "technology": {
+    "framework": "ASP.NET Web Forms",
+    "language": "C#",
+    "dotnet-version": "3.5",
+    "database": "Microsoft SQL Server",
+    "orm": "LINQ-to-SQL",
+    "libraries": [
+      "Newtonsoft.Json"
+    ]
+  },
+  "files": [
+    "App_Code",
+    "Bin",
+    "Default3.aspx",
+    "Default3.aspx.cs",
+    "DefaultGoogleApi.aspx",
+    "DefaultGoogleApi.aspx.cs",
+    "DefaultWriter.aspx",
+    "DefaultWriter.aspx.cs",
+    "web.config",
+    "CONTRIBUTING.md",
+    "INSTRUCTIONS.md",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "info": "echo 'This is a .NET Framework project. Build using Visual Studio or MSBuild.'",
+    "build": "echo 'Please build this project using Visual Studio or: msbuild /p:Configuration=Release'",
+    "start": "echo 'Please run this project through IIS or Visual Studio Development Server'"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "meta": {
+    "created": "2012-01",
+    "purpose": "Educational and historical reference",
+    "status": "archived",
+    "warning": "This project uses deprecated scraping techniques. Use official APIs for production systems."
+  }
+}
